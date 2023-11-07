@@ -5,21 +5,22 @@
 \title{Create a set of fixed effects models}
 \usage{
 FixedEffectsSet(
-  response_unit,
-  covariate_units,
+  response,
+  covariates,
   parameter_names,
   predict_fn,
   model_specifications,
   descriptors = list(),
+  response_definition = NA_character_,
   covariate_definitions = list()
 )
 }
 \arguments{
-\item{response_unit}{A named list containing one element, with a name representing the response
+\item{response}{A named list containing one element, with a name representing the response
 variable and a value representing the units of the response variable
 using the \code{units::as_units} function.}
 
-\item{covariate_units}{A named list containing the covariate specifications, with names
+\item{covariates}{A named list containing the covariate specifications, with names
 representing the covariate name and the values representing the units of
 the coavariate using the \code{units::as_units} function}
 
@@ -37,8 +38,12 @@ using the \code{load_parameter_frame()} function.}
 \item{descriptors}{An optional named list of descriptors that describe the context of the
 allometric model}
 
+\item{response_definition}{A string containing an optional custom response definition, which is used
+instead of the description given by the variable naming system.}
+
 \item{covariate_definitions}{An optional named list of custom covariate definitions that will supersede
-the definitions given by the variable naming system.}
+the definitions given by the variable naming system. The names of the list
+must match the covariate names given in \code{covariates}.}
 }
 \value{
 A set of fixed effects models
@@ -89,10 +94,10 @@ parameter estimates.}
 
 \examples{
 fixef_set <- FixedEffectsSet(
-  response_unit = list(
+  response = list(
     vsia = units::as_units("ft^3")
   ),
-  covariate_units = list(
+  covariates = list(
     dsob = units::as_units("in")
   ),
   predict_fn = function(dsob) {

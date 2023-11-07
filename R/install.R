@@ -14,6 +14,29 @@ check_models_downloaded <- function(verbose) {
   }
 }
 
+#' Check if allometric models are currently installed
+#'
+#' @param verbose Print verbose messages if TRUE
+#' @export
+check_models_installed <- function(verbose = FALSE) {
+  model_data_path <- system.file(
+    "extdata/allometric_models.RDS",
+    package = "allometric"
+  )
+
+  if(model_data_path == "") {
+    if(verbose) {
+      cat("No installed models are found.\n")
+    }
+    return(FALSE)
+  } else {
+    if(verbose) {
+      cat("Installed models found.\n")
+    }
+    return(TRUE)
+  }
+}
+
 #' Delete the local models directory.
 #'
 #' @keywords internal
@@ -70,18 +93,6 @@ download_models <- function(verbose) {
 
   dir.create(model_dir_path)
 
-  latest_commit <- gh::gh("GET /repos/allometric/models/commits/main")
-  sha_7 <- substr(latest_commit$sha, 1, 7)
-
-  if(verbose) {
-    msg <- paste(
-      "Downloading allometric/models repository.\n   Retrieving latest commit: ", sha_7, "\n",
-      sep = ""
-    )
-
-    cat(msg)
-  }
-
   curl::curl_download(
     "https://github.com/allometric/models/archive/refs/heads/main.zip",
     zip_path
@@ -119,7 +130,6 @@ install_models <- function(redownload = FALSE,
   }
 
   allometric_models <- ingest_models(verbose)
-  allometric_models <- new_model_tbl(allometric_models)
 
   out_path <- file.path(
     system.file("extdata", package = "allometric"), "allometric_models.RDS"
@@ -135,38 +145,4 @@ install_models <- function(redownload = FALSE,
   }
 
   saveRDS(allometric_models, out_path)
-}
-
-#' Check allometric models can be installed from local files
-#'
-#' For the purposes of contributing models, it is useful for contributors to
-#' run a local set of allometric model files. For example, when contributors
-#' add new publication files to `allometric/models`, this function can be used
-#' to ensure that the local model files run correctly.
-#'
-#' @param publications_path The path to publication files
-#' @param parameters_path The path to parameter files
-#' @param verbose Whether or not to print verbose messages
-#' @return A model_tbl of the locally checked models
-#' @export
-check_local_models <- function(
-    publications_path, parameters_path, verbose = TRUE
-  ) {
-  allometric_options[["param_search_path"]] <- parameters_path
-
-  if(verbose) {
-    msg <- paste(
-      "Ingesting publication files from: ",
-      publications_path, "\n",
-      sep = ""
-    )
-
-    cat(msg)
-  }
-
-  allometric_models <- ingest_models(verbose, pub_path = publications_path)
-
-  allometric_options[["param_search_path"]] <- "package"
-
-  allometric_models
 }

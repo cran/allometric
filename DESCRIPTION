@@ -1,6 +1,6 @@
 Package: allometric
 Title: Structured Allometric Models for Trees
-Version: 1.4.1
+Version: 2.1.0
 Authors@R: 
     c(
       person(
@@ -25,14 +25,16 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 RoxygenNote: 7.2.3
 Imports: dplyr, methods, rlang, stringr, tibble, units, RefManageR,
-        magrittr, purrr, ISOcodes, tidyr, progress, vctrs, openssl, gh,
-        curl
-Collate: 'data.R' 'utils-pipe.R' 'boilerplate.R' 'all_generics.R'
-        'validity_checks.R' 'model_tbl.R' 'install.R' 'summary.R'
-        'util.R' 'variable_defs.R' 'load.R' 'AllometricModel.R'
-        'ModelSet.R' 'ParametricSet.R' 'FixedEffectsSet.R'
-        'ParametricModel.R' 'MixedEffectsSet.R' 'FixedEffectsModel.R'
-        'MixedEffectsModel.R' 'Publication.R' 'ingest_models.R' 'zzz.R'
+        magrittr, purrr, ISOcodes, tidyr, progress, vctrs, openssl,
+        curl, jsonlite
+Collate: 'all_generics.R' 'validity_checks.R' 'AllometricModel.R'
+        'ModelSet.R' 'ParametricSet.R' 'ParametricModel.R'
+        'FixedEffectsModel.R' 'FixedEffectsSet.R' 'MixedEffectsModel.R'
+        'MixedEffectsSet.R' 'Publication.R' 'Taxa.R' 'Taxon.R'
+        'allometric.R' 'boilerplate.R' 'data.R' 'eq.R' 'fromJSON.R'
+        'install.R' 'load.R' 'model_tbl.R' 'publication_processing.R'
+        'summary.R' 'toJSON.R' 'util.R' 'utils-pipe.R'
+        'variable_defs.R' 'zzz.R'
 Suggests: testthat (>= 3.0.0), knitr, rmarkdown
 Config/testthat/edition: 3
 Depends: R (>= 2.10)
@@ -40,10 +42,10 @@ LazyData: true
 BugReports: https://github.com/allometric/allometric/issues
 Contact: bfrank70@gmail.com
 NeedsCompilation: no
-Packaged: 2023-09-20 17:27:08 UTC; bfran
+Packaged: 2023-11-07 16:50:29 UTC; bfran
 Author: Bryce Frank [aut, cre] (<https://orcid.org/0000-0003-2980-6860>),
   Francisco Mauro [aut] (<https://orcid.org/0000-0002-7832-6268>),
   Elijah Allensworth [aut]
 Maintainer: Bryce Frank <bfrank70@gmail.com>
 Repository: CRAN
-Date/Publication: 2023-09-21 13:30:05 UTC
+Date/Publication: 2023-11-07 17:10:02 UTC

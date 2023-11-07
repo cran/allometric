@@ -4,7 +4,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/allometric/allometric/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/allometric/allometric/actions/workflows/check-standard.yaml)
-[![](https://img.shields.io/badge/devel%20version-1.4.1-blue.svg)](https://github.com/allometric/allometric)
+[![](https://img.shields.io/badge/devel%20version-2.1.0-blue.svg)](https://github.com/allometric/allometric)
 [![codecov](https://codecov.io/gh/allometric/allometric/branch/master/graph/badge.svg?token=3V5KUFMO2X)](https://app.codecov.io/gh/allometric/allometric)
 <!-- badges: end -->
 
@@ -12,39 +12,232 @@
 allometric models. Thousands of allometric models exist in the
 scientific and technical forestry literature, and `allometric` is a
 platform for archiving and using this vast array of models in a robust
-and structured format.
+and structured format. Get started by going to the
+[Installation](#installation) section or the [documentation
+website](https://allometric.org).
 
-`allometric` not only enables the use of allometric models for analysis,
-it also provides a structured language for adding models to the package.
-If you are interested in helping the developer in this process please
-refer to the [Contributing a
-Model](https://allometric.github.io/allometric/articles/installing_a_model.html)
+`allometric` also provides a structured language for adding models to
+the package. If you are interested in helping the developer in this
+process please refer to the [Contributing a
+Model](https://allometric.org/articles/installing_a_model.html)
 vignette.
 
-In total **`allometric` contains 2099 models across 60 publications**,
-the following table displays the number of models by continent and
-category:
+In total **`allometric` contains 2118 models across 64 publications**,
+refer to the [Current Status](#current-status) for a more complete view
+of available models.
+
+## Installation
+
+Currently `allometric` can be installed via CRAN:
+
+``` r
+install.packages("allometric")
+```
+
+For the latest release version, please install directly from GitHub
+using `devtools`:
+
+``` r
+devtools::install_github("allometric/allometric")
+```
+
+Before beginning, make sure to install the models locally by running
+
+``` r
+library(allometric)
+install_models()
+```
+
+This installs all available models from the public
+[models](https://github.com/allometric/models) repository.
+
+Finally, load the models using the `load_models()` function into a
+variable:
+
+``` r
+allometric_models <- load_models()
+head(allometric_models)
+```
+
+    #> # A tibble: 6 × 10
+    #>   id    model_type country region taxa   pub_id model      family_name covt_name
+    #>   <chr> <chr>      <list>  <list> <list> <chr>  <list>     <list>      <list>   
+    #> 1 cc20… site index <chr>   <chr>  <Taxa> barre… <FxdEffcM> <chr [1]>   <chr [2]>
+    #> 2 f508… stem volu… <chr>   <chr>  <Taxa> bell_… <FxdEffcM> <chr [3]>   <chr [2]>
+    #> 3 4d35… taper      <chr>   <chr>  <Taxa> bluhm… <FxdEffcM> <chr [3]>   <chr [4]>
+    #> 4 8d35… stem volu… <chr>   <chr>  <Taxa> brack… <FxdEffcM> <chr [1]>   <chr [2]>
+    #> 5 8682… stem volu… <chr>   <chr>  <Taxa> brack… <FxdEffcM> <chr [1]>   <chr [2]>
+    #> 6 7cfc… stem volu… <chr>   <chr>  <Taxa> brack… <FxdEffcM> <chr [1]>   <chr [2]>
+    #> # ℹ 1 more variable: pub_year <dbl>
+
+## Finding a Model
+
+`allometric_models` is a `tibble` dataframe. Each row represents one
+allometric model with various attributes. Users interact with this table
+the way they would with any other `tibble`.
+
+For example, we can use `dplyr` to filter this table to find models for
+analysis. Let’s say I am interested in finding stem volume models for
+*Tsuga heterophylla*. First, let us filter the `model_type` to include
+only stem volume models
+
+``` r
+stemvol_models <- allometric_models %>%
+  filter(model_type == "stem volume")
+
+stemvol_models
+```
+
+    #> # A tibble: 569 × 10
+    #>    id       model_type  country   region    taxa   pub_id model      family_name
+    #>    <chr>    <chr>       <list>    <list>    <list> <chr>  <list>     <list>     
+    #>  1 f50865ee stem volume <chr [1]> <chr [1]> <Taxa> bell_… <FxdEffcM> <chr [3]>  
+    #>  2 8d35a7b6 stem volume <chr [1]> <chr [1]> <Taxa> brack… <FxdEffcM> <chr [1]>  
+    #>  3 8682a321 stem volume <chr [1]> <chr [1]> <Taxa> brack… <FxdEffcM> <chr [1]>  
+    #>  4 7cfc15b2 stem volume <chr [1]> <chr [1]> <Taxa> brack… <FxdEffcM> <chr [1]>  
+    #>  5 573c8c1b stem volume <chr [1]> <chr [1]> <Taxa> brack… <FxdEffcM> <chr [1]>  
+    #>  6 191eaa47 stem volume <chr [1]> <chr [1]> <Taxa> brack… <FxdEffcM> <chr [1]>  
+    #>  7 ecd1277b stem volume <chr [1]> <chr [1]> <Taxa> brack… <FxdEffcM> <chr [1]>  
+    #>  8 83b38fb4 stem volume <chr [1]> <chr [1]> <Taxa> brack… <FxdEffcM> <chr [1]>  
+    #>  9 a69c8b91 stem volume <chr [1]> <chr [1]> <Taxa> brack… <FxdEffcM> <chr [1]>  
+    #> 10 34575125 stem volume <chr [1]> <chr [1]> <Taxa> brack… <FxdEffcM> <chr [1]>  
+    #> # ℹ 559 more rows
+    #> # ℹ 2 more variables: covt_name <list>, pub_year <dbl>
+
+Next, we can filter to include only *Tsuga heterophylla* using a special
+specifier called `Taxon` that enables rigorous searching of species:
+
+``` r
+tsuga_het_taxon <- Taxon(
+  family = "Pinaceae", genus = "Tsuga", species = "heterophylla"
+)
+
+tsuga_vol_models <- stemvol_models %>%
+  filter(purrr::map_lgl(taxa, ~ tsuga_het_taxon %in% .))
+
+tsuga_vol_models
+```
+
+    #> # A tibble: 4 × 10
+    #>   id    model_type country region taxa   pub_id model      family_name covt_name
+    #>   <chr> <chr>      <list>  <list> <list> <chr>  <list>     <list>      <list>   
+    #> 1 573c… stem volu… <chr>   <chr>  <Taxa> brack… <FxdEffcM> <chr [1]>   <chr [2]>
+    #> 2 191e… stem volu… <chr>   <chr>  <Taxa> brack… <FxdEffcM> <chr [1]>   <chr [2]>
+    #> 3 ecd1… stem volu… <chr>   <chr>  <Taxa> brack… <FxdEffcM> <chr [1]>   <chr [2]>
+    #> 4 9caa… stem volu… <chr>   <chr>  <Taxa> poude… <FxdEffcM> <chr [4]>   <chr [2]>
+    #> # ℹ 1 more variable: pub_year <dbl>
+
+We can see that we have 4 models to choose from. Let’s select the model
+from the publication `poudel_2019`
+
+``` r
+tsuga_poudel <- tsuga_vol_models %>% select_model("9caa80f2")
+```
+
+This example is very basic, and more complex search examples can be
+found in the
+[`load_models()`](https://allometric.org/reference/load_models.html)
+documentation. Models can be searched not only by their taxonomic
+information, but also the types of measurements the models require,
+their geographic region, and other attributes. We highly encourage users
+review the linked examples for production use of `allometric`.
+
+## Using the Model
+
+`tsuga_poudel` now represents an allometric model that can be used for
+prediction. We must next figure out how to use the model.
+
+Using the standard output of `tsuga_poudel` we obtain a summary of the
+model form, the response variable, the needed covariates and their
+units, a summary of the model descriptors (i.e., what makes the model
+unique within the publication), and estimates of the parameters.
+
+``` r
+tsuga_poudel
+```
+
+    #> Model Call: 
+    #> vsia = f(dsob, hst) 
+    #>  
+    #> vsia [m3]: volume of the entire stem inside bark, including top and stump
+    #> dsob [cm]: diameter of the stem, outside bark at breast height
+    #> hst [m]: total height of the stem 
+    #> 
+    #> Parameter Estimates: 
+    #> # A tibble: 1 × 3
+    #>       a     b     c
+    #>   <dbl> <dbl> <dbl>
+    #> 1 -9.98  1.96 0.925
+    #> 
+    #> Model Descriptors: 
+    #> # A tibble: 1 × 3
+    #>   country   region     taxa  
+    #>   <list>    <list>     <list>
+    #> 1 <chr [2]> <chr [10]> <Taxa>
+
+We can see from the `Model Call` section that `tsuga_poudel` will
+require two covariates called `dsob`, which refers to diameter outside
+bark at breast height, and `hst`, the height of the main stem.
+`allometric` uses a variable naming system to determine the names of
+response variables and covariates (refer to the [Variable Naming System
+vignette](https://allometric.org/articles/variable_naming_system.html)).
+
+Using the `predict()` method we can easily use the function as defined
+by providing values of these two covariates.
+
+``` r
+predict(tsuga_poudel, 12, 65)
+```
+
+    #> 0.2868491 [m^3]
+
+or we can use the prediction function with a data frame of values
+
+``` r
+my_trees <- data.frame(dias = c(12, 15, 20), heights = c(65, 75, 100))
+predict(tsuga_poudel, my_trees$dias, my_trees$heights)
+```
+
+    #> Units: [m^3]
+    #> [1] 0.2868491 0.5068963 1.1618632
+
+or even using the convenience of `dplyr`
+
+``` r
+my_trees %>%
+  mutate(vols = predict(tsuga_poudel, dias, heights))
+```
+
+    #>   dias heights            vols
+    #> 1   12      65 0.2868491 [m^3]
+    #> 2   15      75 0.5068963 [m^3]
+    #> 3   20     100 1.1618632 [m^3]
+
+The above example is a very basic use case for `allometric`. Please
+refer to the [Common Inventory Use Cases
+vignette](https://allometric.org/articles/inventory_example.html) for
+more complex examples.
+
+## Current Status
+
+In total **`allometric` contains 2118 models across 64 publications**.
 
 | category                |  AS |  EU |  NA |  AF |  OC |  SA |
 |:------------------------|----:|----:|----:|----:|----:|----:|
-| biomass component       |  26 | 136 | 435 |   0 |   0 |   0 |
+| biomass component       |  26 | 136 | 446 |   0 |   0 |   0 |
 | crown diameter          |   0 |  12 |  36 |   0 |   0 |   0 |
 | crown height            |   0 |  12 |   0 |   0 |   0 |   0 |
 | shrub biomass           |   0 |  19 |   0 |   0 |   0 |   0 |
 | shrub biomass increment |   0 |  28 |   0 |   0 |   0 |   0 |
 | shrub diameter          |   0 |  39 |   0 |   0 |   0 |   0 |
 | shrub height            |   0 |  28 |   0 |   0 |   0 |   0 |
-| site index              |   0 |   0 |  52 |   0 |   0 |   0 |
-| stem height             |   7 |   0 | 345 |  12 |   2 |  18 |
+| site index              |   0 |   0 |  55 |   0 |   0 |   0 |
+| stem height             |   7 |   0 | 346 |  12 |   2 |  17 |
 | stem volume             |   4 |   0 | 575 |   0 |   0 |  20 |
 | stump volume            |   0 |   0 |  64 |   0 |   0 |   0 |
 | taper                   |   2 |   0 |  18 |   0 |   0 |   0 |
-| tree biomass            |   2 |  36 |  90 |   0 |  21 |  16 |
+| tree biomass            |   2 |  36 |  94 |   0 |  21 |  16 |
 | other                   |   0 |   0 | 168 |   0 |   0 |   0 |
-
-Refer to the
-[Reference](https://allometric.github.io/allometric/reference/index.html)
-for a full list of publications disaggregated by allometric model type.
 
 ## How Can I Help?
 
@@ -70,218 +263,31 @@ difficult tasks.
     will find a list of reports that need manual digitization. These can
     be handled by anyone with Excel and a cup of coffee.
 4.  [Learn how to install and write
-    models](https://allometric.github.io/allometric/articles/installing_a_model.html).
+    models](https://allometric.org/articles/installing_a_model.html).
     Motivated users can learn how to install models directly using the
     package functions and git pull requests. Users comfortable with R
     and git can handle this task.
 
 Other ideas? Contact <bfrank70@gmail.com> to help out.
 
-## Installation
-
-Currently `allometric` is only available on GitHub, and can be installed
-using `devtools`.
-
-``` r
-devtools::install_github("allometric/allometric")
-```
-
-## Getting Started
-
-Most users will only be interested in finding and using allometric
-equations in their analysis. `allometric` allows rapid searching of
-currently installed models.
-
-Before beginning, make sure to install the models locally by running
-
-``` r
-library(allometric)
-install_models()
-```
-
-This compiles the allometric models, and enables their use.
-`install_models()` only needs to be ran at installation or following any
-package updates. The user can then call `load_models()` to load all
-available allometric models into memory.
-
-``` r
-allometric_models <- load_models()
-head(allometric_models)
-```
-
-    #> # A tibble: 6 × 12
-    #>   id       model_type   country   region family  genus species model      pub_id
-    #>   <chr>    <chr>        <list>    <list> <chr>   <chr> <chr>   <list>     <chr> 
-    #> 1 539629a5 stem height  <chr [1]> <chr>  Accipi… Circ… canade… <FxdEffcM> hahn_…
-    #> 2 7bc0e06a stem volume  <chr [1]> <chr>  Accipi… Circ… canade… <FxdEffcM> hahn_…
-    #> 3 1fa4219a stem volume  <chr [1]> <chr>  Accipi… Circ… canade… <FxdEffcM> hahn_…
-    #> 4 b359d3ce stump volume <chr [1]> <chr>  Accipi… Circ… canade… <FxdEffcM> hahn_…
-    #> 5 fb5c4575 stem ratio   <chr [1]> <chr>  Accipi… Circ… canade… <FxdEffcM> hahn_…
-    #> 6 733186a1 stem height  <chr [1]> <chr>  Acerac… Acer  macrop… <FxdEffcM> fvs_2…
-    #> # ℹ 3 more variables: family_name <list>, covt_name <list>, pub_year <dbl>
-
-**Finding and Selecting a Model**
-
-`allometric_models` is a `tibble::tbl_df` dataframe. Each row represents
-one allometric model with various attributes. Some columns are `list`
-columns, which are columns that contain lists with multiple values as
-their elements. One example of this is the `family_name` column, which
-contains the names of all authors for the publication that contains the
-model.
-
-`list` columns enable rigorous searching of models covered in the
-`?allometric_models` help page, but to get started we will use a helper
-function called `unnest_models()` that will give us a clearer picture of
-the available data. Using the `cols` argument we can specify which
-columns we want to unnest. In this case we will unnest the `family_name`
-column.
-
-``` r
-unnested_models <- unnest_models(allometric_models, cols = "family_name")
-unnested_models
-```
-
-    #> # A tibble: 5,076 × 12
-    #>    id       model_type   country   region family genus species model      pub_id
-    #>    <chr>    <chr>        <list>    <list> <chr>  <chr> <chr>   <list>     <chr> 
-    #>  1 539629a5 stem height  <chr [1]> <chr>  Accip… Circ… canade… <FxdEffcM> hahn_…
-    #>  2 7bc0e06a stem volume  <chr [1]> <chr>  Accip… Circ… canade… <FxdEffcM> hahn_…
-    #>  3 1fa4219a stem volume  <chr [1]> <chr>  Accip… Circ… canade… <FxdEffcM> hahn_…
-    #>  4 b359d3ce stump volume <chr [1]> <chr>  Accip… Circ… canade… <FxdEffcM> hahn_…
-    #>  5 fb5c4575 stem ratio   <chr [1]> <chr>  Accip… Circ… canade… <FxdEffcM> hahn_…
-    #>  6 733186a1 stem height  <chr [1]> <chr>  Acera… Acer  macrop… <FxdEffcM> fvs_2…
-    #>  7 a31af9a5 stem height  <chr [1]> <chr>  Acera… Acer  macrop… <FxdEffcM> fvs_2…
-    #>  8 44f59d7d stem height  <chr [1]> <chr>  Acera… Acer  macrop… <FxdEffcM> fvs_2…
-    #>  9 1d58b6d4 stem height  <chr [1]> <chr>  Acera… Acer  macrop… <FxdEffcM> fvs_2…
-    #> 10 539ef85b stem height  <chr [1]> <chr>  Acera… Acer  macrop… <FxdEffcM> fvs_2…
-    #> # ℹ 5,066 more rows
-    #> # ℹ 3 more variables: family_name <chr>, covt_name <list>, pub_year <dbl>
-
-Now, each row represents unique data combinations for each model, which
-can be quickly filtered by most users using `dplyr::filter`. For
-example, to find a volume model for the genus Alnus that had
-`"Brackett"` as an author or co-author we can use
-
-``` r
-brackett_alnus_vol <- unnested_models %>%
-  dplyr::filter(
-    family_name == "Brackett", model_type == "stem volume",
-    genus == "Alnus"
-  )
-
-brackett_alnus_vol
-```
-
-    #> # A tibble: 1 × 12
-    #>   id       model_type  country   region family   genus species model      pub_id
-    #>   <chr>    <chr>       <list>    <list> <chr>    <chr> <chr>   <list>     <chr> 
-    #> 1 f21028ef stem volume <chr [1]> <chr>  Betulac… Alnus rubra   <FxdEffcM> brack…
-    #> # ℹ 3 more variables: family_name <chr>, covt_name <list>, pub_year <dbl>
-
-we can see that model `f21028ef` is a volume model written by Brackett
-for *Alnus rubra*. The model can be selected using the `id` field:
-
-``` r
-brackett_alnus_mod <- brackett_alnus_vol %>% select_model("f21028ef")
-```
-
-or by using the row index
-
-``` r
-brackett_alnus_mod <- brackett_alnus_vol %>% select_model(1)
-```
-
-**Determine Needed Information**
-
-`brackett_alnus_mod` now represents an allometric model that can be used
-for prediction.
-
-Using the standard output of `brackett_alnus_mod` we obtain a summary of
-the model form, the response variable, the needed covariates and their
-units, a summary of the model descriptors (i.e., what makes the model
-unique within the publication), and estimates of the parameters.
-
-``` r
-brackett_alnus_mod
-```
-
-    #> Model Call: 
-    #> vsia = f(dsob, hst) 
-    #>  
-    #> vsia [ft3]: volume of the entire stem inside bark, including top and stump
-    #> dsob [in]: diameter of the stem, outside bark at breast height
-    #> hst [ft]: total height of the stem 
-    #> 
-    #> Parameter Estimates: 
-    #> # A tibble: 1 × 3
-    #>       a     b     c
-    #>   <dbl> <dbl> <dbl>
-    #> 1 -2.67  1.92  1.07
-    #> 
-    #> Model Descriptors: 
-    #> # A tibble: 1 × 7
-    #>   country region family     genus species geographic_region age_class
-    #>   <chr>   <chr>  <chr>      <chr> <chr>   <chr>             <chr>    
-    #> 1 US      US-WA  Betulaceae Alnus rubra   <NA>              <NA>
-
-We can see from the `Model Call` section that `brackett_alnus_mod` will
-require two covariates called `dsob`, which refers to diameter outside
-bark at breast height, and `hst`, the height of the main stem.
-`allometric` uses a variable naming system to determine the names of
-response variables and covariates (refer to the [Variable Naming System
-vignette](https://allometric.github.io/allometric/articles/variable_naming_system.html)).
-
-**Predict Using the Selected Model**
-
-Using the `predict()` method we can easily use the function as defined
-by providing values of these two covariates.
-
-``` r
-predict(brackett_alnus_mod, 12, 65)
-```
-
-    #> 22.2347 [ft^3]
-
-or we can use the prediction function with a data frame of values
-
-``` r
-my_trees <- data.frame(dias = c(12, 15, 20), heights = c(65, 75, 100))
-predict(brackett_alnus_mod, my_trees$dias, my_trees$heights)
-```
-
-    #> Units: [ft^3]
-    #> [1] 22.23470 39.80216 94.20053
-
-or even using the convenience of `dplyr`
-
-``` r
-my_trees %>%
-  mutate(vols = predict(brackett_alnus_mod, dias, heights))
-```
-
-    #>   dias heights            vols
-    #> 1   12      65 22.23470 [ft^3]
-    #> 2   15      75 39.80216 [ft^3]
-    #> 3   20     100 94.20053 [ft^3]
-
 ## Next Steps
 
 The following vignettes available on the [package
-website](https://allometric.github.io/allometric/index.html) provide
-information to two primary audiences.
+website](https://allometric.org/index.html) provide information to two
+primary audiences.
 
 Users interested in finding models for analysis will find the following
 documentation most useful:
 
 - [Common Inventory Use
-  Cases](https://allometric.github.io/allometric/articles/inventory_example.html)
+  Cases](https://allometric.org/articles/inventory_example.html)
 
 Users interested in **contributing models** to the package will find
 these vignettes the most useful:
 
 - [Contributing a
-  Model](https://allometric.github.io/allometric/articles/installing_a_model.html)
+  Model](https://allometric.org/articles/installing_a_model.html)
 - [Describing a Model with
-  Descriptors](https://allometric.github.io/allometric/articles/descriptors.html)
+  Descriptors](https://allometric.org/articles/descriptors.html)
 - [Variable Naming
-  System](https://allometric.github.io/allometric/articles/variable_naming_system.html)
+  System](https://allometric.org/articles/variable_naming_system.html)

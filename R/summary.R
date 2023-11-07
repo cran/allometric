@@ -2,7 +2,7 @@
 # methods
 
 .get_model_str <- function(object) {
-  response_name <- names(object@response_unit)[[1]]
+  response_name <- names(object@response)[[1]]
   predict_body <- body(object@predict_fn)
   last_line_ix <- length(predict_body)
 
@@ -27,10 +27,33 @@ parse_unit_str <- function(variable) {
   unit_str
 }
 
-.get_variable_description <- function(variable, covariate_descriptions) {
-  variable_name <- names(variable)[[1]]
+.get_response_description <- function(response, response_description) {
+  variable_name <- names(response)[[1]]
 
-  unit_str <- parse_unit_str(variable)
+  unit_str <- parse_unit_str(response)
+  unit_str <- paste("[", unit_str, "]", sep = "")
+
+  if(!is.na(response_description)) {
+    variable_description <- response_description
+  } else {
+    variable_description <- get_variable_def(variable_name, return_exact_only = T)$description
+  }
+
+  if (identical(variable_description, character(0))) {
+    variable_description <- "variable not defined"
+  }
+
+  list(
+    name = variable_name,
+    unit_label = unit_str,
+    desc = variable_description
+  )
+}
+
+.get_covariate_description <- function(covariate, covariate_descriptions) {
+  variable_name <- names(covariate)[[1]]
+
+  unit_str <- parse_unit_str(covariate)
   unit_str <- paste("[", unit_str, "]", sep = "")
 
   if (variable_name %in% names(covariate_descriptions)) {
@@ -51,16 +74,22 @@ parse_unit_str <- function(variable) {
 }
 
 .get_variable_descriptions <- function(object) {
-  vars <- c(object@response_unit, object@covariate_units)
-
+  vars <- c(object@response, object@covariates)
   var_descs <- list()
-  for (i in seq_along(vars)) {
-    var_desc <- .get_variable_description(
+
+  var_descs[[1]] <- .get_response_description(
+    vars[1],
+    object@response_definition
+  )
+
+  for (i in 2:length(vars)) {
+    var_desc <- .get_covariate_description(
       vars[i],
       object@covariate_definitions
     )
     var_descs[[i]] <- var_desc
   }
+
   dplyr::bind_rows(var_descs)
 }
 
@@ -78,3 +107,4 @@ parse_unit_str <- function(variable) {
 
   out
 }
+

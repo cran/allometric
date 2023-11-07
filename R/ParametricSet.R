@@ -15,15 +15,17 @@
 #' @return An object of class ParametricSet
 #' @export
 #' @keywords internal
-ParametricSet <- function(response_unit, covariate_units, predict_fn,
+ParametricSet <- function(response, covariates, predict_fn,
                           model_specifications, parameter_names,
-                          descriptors = list(), covariate_definitions = list()
+                          descriptors = list(),
+                          response_definition = NA_character_,
+                          covariate_definitions = list()
                           ) {
 
   parametric_set <- .ParametricSet(
     ModelSet(
-      response_unit, covariate_units, predict_fn, descriptors,
-      covariate_definitions
+      response, covariates, predict_fn, descriptors,
+      response_definition, covariate_definitions
     ),
     parameter_names = parameter_names,
     model_specifications = model_specifications
@@ -47,7 +49,7 @@ setMethod("get_variable_descriptions", "ParametricSet", function(object) {
 #' @inherit model_call
 #' @keywords internal
 setMethod("model_call", signature(object = "ParametricSet"), function(object) {
-  response_var <- names(object@response_unit)[[1]]
+  response_var <- names(object@response)[[1]]
 
   arg_names <- names(as.list(args(object@predict_fn)))
   arg_names <- arg_names[-length(arg_names)]

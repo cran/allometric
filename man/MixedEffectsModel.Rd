@@ -5,27 +5,28 @@
 \title{Create a mixed effects model}
 \usage{
 MixedEffectsModel(
-  response_unit,
-  covariate_units,
+  response,
+  covariates,
   predict_ranef,
   predict_fn,
   parameters,
   fixed_only = FALSE,
   descriptors = list(),
+  response_definition = NA_character_,
   covariate_definitions = list()
 )
 }
 \arguments{
-\item{response_unit}{A named list containing one element, with a name representing the response
+\item{response}{A named list containing one element, with a name representing the response
 variable and a value representing the units of the response variable
 using the \code{units::as_units} function.}
 
-\item{covariate_units}{A named list containing the covariate specifications, with names
+\item{covariates}{A named list containing the covariate specifications, with names
 representing the covariate name and the values representing the units of
 the coavariate using the \code{units::as_units} function}
 
 \item{predict_ranef}{A function that predicts the random effects, takes any named covariates in
-\code{covariate_units} as arguments}
+\code{covariates} as arguments}
 
 \item{predict_fn}{A function that takes the covariate names as arguments and returns a
 prediction of the response variable. This function should be vectorized.}
@@ -39,8 +40,12 @@ information to predict the random effects.}
 \item{descriptors}{An optional named list of descriptors that describe the context of the
 allometric model}
 
+\item{response_definition}{A string containing an optional custom response definition, which is used
+instead of the description given by the variable naming system.}
+
 \item{covariate_definitions}{An optional named list of custom covariate definitions that will supersede
-the definitions given by the variable naming system.}
+the definitions given by the variable naming system. The names of the list
+must match the covariate names given in \code{covariates}.}
 }
 \value{
 An instance of MixedEffectsModel
@@ -71,10 +76,10 @@ using only fixed effects}
 
 \examples{
 MixedEffectsModel(
-  response_unit = list(
+  response = list(
     hst = units::as_units("m")
   ),
-  covariate_units = list(
+  covariates = list(
     dsob = units::as_units("cm")
   ),
   parameters = list(
