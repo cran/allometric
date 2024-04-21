@@ -4,7 +4,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/allometric/allometric/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/allometric/allometric/actions/workflows/check-standard.yaml)
-[![](https://img.shields.io/badge/devel%20version-2.1.0-blue.svg)](https://github.com/allometric/allometric)
+[![](https://img.shields.io/badge/devel%20version-2.3.0-blue.svg)](https://github.com/allometric/allometric)
 [![codecov](https://codecov.io/gh/allometric/allometric/branch/master/graph/badge.svg?token=3V5KUFMO2X)](https://app.codecov.io/gh/allometric/allometric)
 <!-- badges: end -->
 
@@ -22,7 +22,7 @@ process please refer to the [Contributing a
 Model](https://allometric.org/articles/installing_a_model.html)
 vignette.
 
-In total **`allometric` contains 2118 models across 64 publications**,
+In total **`allometric` contains 2791 models across 72 publications**,
 refer to the [Current Status](#current-status) for a more complete view
 of available models.
 
@@ -62,12 +62,12 @@ head(allometric_models)
     #> # A tibble: 6 × 10
     #>   id    model_type country region taxa   pub_id model      family_name covt_name
     #>   <chr> <chr>      <list>  <list> <list> <chr>  <list>     <list>      <list>   
-    #> 1 cc20… site index <chr>   <chr>  <Taxa> barre… <FxdEffcM> <chr [1]>   <chr [2]>
-    #> 2 f508… stem volu… <chr>   <chr>  <Taxa> bell_… <FxdEffcM> <chr [3]>   <chr [2]>
-    #> 3 4d35… taper      <chr>   <chr>  <Taxa> bluhm… <FxdEffcM> <chr [3]>   <chr [4]>
-    #> 4 8d35… stem volu… <chr>   <chr>  <Taxa> brack… <FxdEffcM> <chr [1]>   <chr [2]>
-    #> 5 8682… stem volu… <chr>   <chr>  <Taxa> brack… <FxdEffcM> <chr [1]>   <chr [2]>
-    #> 6 7cfc… stem volu… <chr>   <chr>  <Taxa> brack… <FxdEffcM> <chr [1]>   <chr [2]>
+    #> 1 76cc… site index <chr>   <chr>  <Taxa> barne… <FxdEffcM> <chr [1]>   <chr [2]>
+    #> 2 cc20… site index <chr>   <chr>  <Taxa> barre… <FxdEffcM> <chr [1]>   <chr [2]>
+    #> 3 3955… stem heig… <chr>   <chr>  <Taxa> barre… <FxdEffcM> <chr [1]>   <chr [1]>
+    #> 4 48b4… stem heig… <chr>   <chr>  <Taxa> barre… <FxdEffcM> <chr [1]>   <chr [1]>
+    #> 5 2fa0… stem heig… <chr>   <chr>  <Taxa> barre… <FxdEffcM> <chr [1]>   <chr [1]>
+    #> 6 7a58… stem heig… <chr>   <chr>  <Taxa> barre… <FxdEffcM> <chr [1]>   <chr [1]>
     #> # ℹ 1 more variable: pub_year <dbl>
 
 ## Finding a Model
@@ -88,7 +88,7 @@ stemvol_models <- allometric_models %>%
 stemvol_models
 ```
 
-    #> # A tibble: 569 × 10
+    #> # A tibble: 570 × 10
     #>    id       model_type  country   region    taxa   pub_id model      family_name
     #>    <chr>    <chr>       <list>    <list>    <list> <chr>  <list>     <list>     
     #>  1 f50865ee stem volume <chr [1]> <chr [1]> <Taxa> bell_… <FxdEffcM> <chr [3]>  
@@ -101,7 +101,7 @@ stemvol_models
     #>  8 83b38fb4 stem volume <chr [1]> <chr [1]> <Taxa> brack… <FxdEffcM> <chr [1]>  
     #>  9 a69c8b91 stem volume <chr [1]> <chr [1]> <Taxa> brack… <FxdEffcM> <chr [1]>  
     #> 10 34575125 stem volume <chr [1]> <chr [1]> <Taxa> brack… <FxdEffcM> <chr [1]>  
-    #> # ℹ 559 more rows
+    #> # ℹ 560 more rows
     #> # ℹ 2 more variables: covt_name <list>, pub_year <dbl>
 
 Next, we can filter to include only *Tsuga heterophylla* using a special
@@ -220,24 +220,24 @@ more complex examples.
 
 ## Current Status
 
-In total **`allometric` contains 2118 models across 64 publications**.
+In total **`allometric` contains 2791 models across 72 publications**.
 
-| category                |  AS |  EU |  NA |  AF |  OC |  SA |
+| category                |  AS |  EU |  NA |  SA |  AF |  OC |
 |:------------------------|----:|----:|----:|----:|----:|----:|
-| biomass component       |  26 | 136 | 446 |   0 |   0 |   0 |
+| biomass component       | 543 | 653 | 442 |   0 |   0 |   0 |
 | crown diameter          |   0 |  12 |  36 |   0 |   0 |   0 |
 | crown height            |   0 |  12 |   0 |   0 |   0 |   0 |
 | shrub biomass           |   0 |  19 |   0 |   0 |   0 |   0 |
 | shrub biomass increment |   0 |  28 |   0 |   0 |   0 |   0 |
 | shrub diameter          |   0 |  39 |   0 |   0 |   0 |   0 |
 | shrub height            |   0 |  28 |   0 |   0 |   0 |   0 |
-| site index              |   0 |   0 |  55 |   0 |   0 |   0 |
-| stem height             |   7 |   0 | 346 |  12 |   2 |  17 |
-| stem volume             |   4 |   0 | 575 |   0 |   0 |  20 |
+| site index              |   0 |   0 |  56 |   0 |   0 |   0 |
+| stem height             |   4 |   0 | 385 |   7 |   5 |   2 |
+| stem volume             |   4 |   0 | 545 |  21 |   0 |   0 |
 | stump volume            |   0 |   0 |  64 |   0 |   0 |   0 |
-| taper                   |   2 |   0 |  18 |   0 |   0 |   0 |
-| tree biomass            |   2 |  36 |  94 |   0 |  21 |  16 |
-| other                   |   0 |   0 | 168 |   0 |   0 |   0 |
+| taper                   |   2 |   0 |  16 |   0 |   0 |   0 |
+| tree biomass            |  61 |  95 |  66 |  17 |   0 |  21 |
+| other                   |   0 |   0 | 164 |  35 |   0 |   0 |
 
 ## How Can I Help?
 

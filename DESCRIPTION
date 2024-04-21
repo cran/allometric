@@ -1,6 +1,6 @@
 Package: allometric
 Title: Structured Allometric Models for Trees
-Version: 2.1.0
+Version: 2.3.0
 Authors@R: 
     c(
       person(
@@ -42,10 +42,10 @@ LazyData: true
 BugReports: https://github.com/allometric/allometric/issues
 Contact: bfrank70@gmail.com
 NeedsCompilation: no
-Packaged: 2023-11-07 16:50:29 UTC; bfran
+Packaged: 2024-04-21 20:59:48 UTC; bfran
 Author: Bryce Frank [aut, cre] (<https://orcid.org/0000-0003-2980-6860>),
   Francisco Mauro [aut] (<https://orcid.org/0000-0002-7832-6268>),
   Elijah Allensworth [aut]
 Maintainer: Bryce Frank <bfrank70@gmail.com>
 Repository: CRAN
-Date/Publication: 2023-11-07 17:10:02 UTC
+Date/Publication: 2024-04-21 21:12:33 UTC

@@ -20,16 +20,100 @@ Printing the \code{head} of \code{allometric_models}, we can see the structure o
 data
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{allometric_models <- load_models()
+#> Warning in readRDS(rds_path): strings not representable in native encoding will be translated to UTF-8
+#> Warning in readRDS(rds_path): input string 'Málaga' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Málaga' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Cáceres' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Málaga' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Cáceres' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Málaga' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Cáceres' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Málaga' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Málaga' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Málaga' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Málaga' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Málaga' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Málaga' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Málaga' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Málaga' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Málaga' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Cáceres' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Cáceres' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Cáceres' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Cáceres' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Cáceres' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Cáceres' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Málaga' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Cáceres' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Málaga' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Cáceres' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Málaga' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Cáceres' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Málaga' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Málaga' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Cáceres' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Málaga' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Cáceres' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in readRDS(rds_path): input string 'Cádiz' cannot be translated to UTF-8, is it valid in 'UTF-8' ?
 head(allometric_models)
 #> # A tibble: 6 x 10
-#>   id       model_type  country   region    taxa   pub_id        model      family_name covt_name pub_year
-#>   <chr>    <chr>       <list>    <list>    <list> <chr>         <list>     <list>      <list>       <dbl>
-#> 1 cc2078aa site index  <chr [1]> <chr [2]> <Taxa> barrett_1978  <FxdEffcM> <chr [1]>   <chr [2]>     1978
-#> 2 f50865ee stem volume <chr [1]> <chr [1]> <Taxa> bell_1981     <FxdEffcM> <chr [3]>   <chr [2]>     1981
-#> 3 4d35d681 taper       <chr [2]> <chr [3]> <Taxa> bluhm_2007    <FxdEffcM> <chr [3]>   <chr [4]>     2007
-#> 4 8d35a7b6 stem volume <chr [1]> <chr [1]> <Taxa> brackett_1977 <FxdEffcM> <chr [1]>   <chr [2]>     1977
-#> 5 8682a321 stem volume <chr [1]> <chr [1]> <Taxa> brackett_1977 <FxdEffcM> <chr [1]>   <chr [2]>     1977
-#> 6 7cfc15b2 stem volume <chr [1]> <chr [1]> <Taxa> brackett_1977 <FxdEffcM> <chr [1]>   <chr [2]>     1977
+#>   id       model_type  country   region    taxa   pub_id       model      family_name covt_name pub_year
+#>   <chr>    <chr>       <list>    <list>    <list> <chr>        <list>     <list>      <list>       <dbl>
+#> 1 76ccc16a site index  <chr [1]> <chr [2]> <Taxa> barnes_1962  <FxdEffcM> <chr [1]>   <chr [2]>     1962
+#> 2 cc2078aa site index  <chr [1]> <chr [2]> <Taxa> barrett_1978 <FxdEffcM> <chr [1]>   <chr [2]>     1978
+#> 3 3955ab4f stem height <chr [1]> <chr [3]> <Taxa> barrett_2006 <FxdEffcM> <chr [1]>   <chr [1]>     2006
+#> 4 48b4aecf stem height <chr [1]> <chr [3]> <Taxa> barrett_2006 <FxdEffcM> <chr [1]>   <chr [1]>     2006
+#> 5 2fa084c2 stem height <chr [1]> <chr [3]> <Taxa> barrett_2006 <FxdEffcM> <chr [1]>   <chr [1]>     2006
+#> 6 7a585d5e stem height <chr [1]> <chr [3]> <Taxa> barrett_2006 <FxdEffcM> <chr [1]>   <chr [1]>     2006
 }\if{html}{\out{</div>}}
 
 The columns are:
@@ -129,16 +213,16 @@ to find models for the Pinus genus we can use
 
 head(pinus_models)
 #> # A tibble: 6 x 10
-#>   id       model_type  country   region    taxa   pub_id         model      family_name covt_name pub_year
-#>   <chr>    <chr>       <list>    <list>    <list> <chr>          <list>     <list>      <list>       <dbl>
-#> 1 cc2078aa site index  <chr [1]> <chr [2]> <Taxa> barrett_1978   <FxdEffcM> <chr [1]>   <chr [2]>     1978
-#> 2 3ab229f7 stem volume <chr [1]> <chr [1]> <Taxa> brackett_1977  <FxdEffcM> <chr [1]>   <chr [2]>     1977
-#> 3 4a13ca7e stem volume <chr [1]> <chr [1]> <Taxa> brackett_1977  <FxdEffcM> <chr [1]>   <chr [2]>     1977
-#> 4 21d11091 stem volume <chr [1]> <chr [1]> <Taxa> brackett_1977  <FxdEffcM> <chr [1]>   <chr [2]>     1977
-#> 5 b1d070b5 stem volume <chr [1]> <chr [1]> <Taxa> chojnacky_1985 <FxdEffcM> <chr [1]>   <chr [3]>     1985
-#> 6 a5611fec stem volume <chr [1]> <chr [1]> <Taxa> chojnacky_1985 <FxdEffcM> <chr [1]>   <chr [3]>     1985
+#>   id       model_type  country   region    taxa   pub_id       model      family_name covt_name pub_year
+#>   <chr>    <chr>       <list>    <list>    <list> <chr>        <list>     <list>      <list>       <dbl>
+#> 1 cc2078aa site index  <chr [1]> <chr [2]> <Taxa> barrett_1978 <FxdEffcM> <chr [1]>   <chr [2]>     1978
+#> 2 502152d1 stem height <chr [1]> <chr [3]> <Taxa> barrett_2006 <FxdEffcM> <chr [1]>   <chr [1]>     2006
+#> 3 3fb70119 stem height <chr [1]> <chr [3]> <Taxa> barrett_2006 <FxdEffcM> <chr [1]>   <chr [1]>     2006
+#> 4 925de182 stem height <chr [1]> <chr [3]> <Taxa> barrett_2006 <FxdEffcM> <chr [1]>   <chr [1]>     2006
+#> 5 910dddb1 stem height <chr [1]> <chr [3]> <Taxa> barrett_2006 <FxdEffcM> <chr [1]>   <chr [1]>     2006
+#> 6 5b3e21e7 stem height <chr [1]> <chr [3]> <Taxa> barrett_2006 <FxdEffcM> <chr [1]>   <chr [1]>     2006
 nrow(pinus_models)
-#> [1] 285
+#> [1] 351
 }\if{html}{\out{</div>}}
 
 Users can also search with a specific taxon, which allows a full
@@ -174,7 +258,7 @@ limited by their available tree measurements.
 )
 
 nrow(dia_ht_models)
-#> [1] 241
+#> [1] 282
 }\if{html}{\out{</div>}}
 
 Breaking this down, we have the first condition \code{model_type=='stem_height'}
@@ -184,7 +268,7 @@ character vector. The \code{.} represents a given character vector for that row.
 First, we ensure that the vector is only one element in size using
 \code{length(.)==1}, then we ensure that the first (and only) element of this
 vector is equal to \code{'dsob'}, (diameter outside bark at breast height). In
-this case, 241 are available in the package.
+this case, 282 are available in the package.
 }
 
 \section{Finding a Model for a Region}{
@@ -198,10 +282,10 @@ developed using data from \code{US-OR}
 )
 
 nrow(us_or_models)
-#> [1] 498
+#> [1] 537
 }\if{html}{\out{</div>}}
 
-We can see that 498 allometric models are defined for the
+We can see that 537 allometric models are defined for the
 state of Oregon, US.
 }
 

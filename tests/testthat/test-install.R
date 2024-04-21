@@ -7,14 +7,9 @@ test_that("Models install from allometric/models repository", {
 
   expect_false(models_dir_check == "")
 
-  parameters_dir_check <- system.file(
-    "models-main/parameters", package = "allometric"
+  models_rds_check <- system.file(
+    "models-main/models.RDS", package = "allometric"
   )
 
-  publications_dir_check <- system.file(
-    "models-main/publications", package = "allometric"
-  )
-
-  expect_false(parameters_dir_check   == "")
-  expect_false(publications_dir_check == "")
+  expect_false(models_rds_check == "")
 })

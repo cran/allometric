@@ -30,6 +30,9 @@ var_defs_pre <- list(
   ),
   n = utils::read.csv(
     system.file("variable_defs/n.csv", package = "allometric")
+  ),
+  t = utils::read.csv(
+    system.file("variable_defs/t.csv", package = "allometric")
   )
 )
 
@@ -43,6 +46,4 @@ suffixes <- utils::read.csv(
 
 var_defs <- prepare_var_defs(var_defs_pre, measure_defs, component_defs)
 
-allometric_options <- list(
-  param_search_path = "package"
-)
+set_params_path("package")
